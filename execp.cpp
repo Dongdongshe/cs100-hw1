@@ -30,7 +30,8 @@ while(1)
 			++i;
 			cmd = strtok(NULL, " \n");}
 		//	args[i] = NULL;
-
+		if (strcmp(args[0], "exit") == 0) exit(0);
+		else {
 		int pid = fork();
 		if(pid == -1){
 			perror("sdf");
@@ -39,13 +40,13 @@ while(1)
 		}
 		else if (pid == 0)
 		 {
-		 	printf("You are in child process now."); 
 			if(execvp(args[0], args) == -1){
 				printf("%s: %s\n", args[0], "command not found");
 		        exit(1);				}											 }
 	     else {
 	     	 wait(NULL);
 	     }
+	}
 	}
 	return 0;
 }
