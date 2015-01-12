@@ -9,23 +9,27 @@ int main(int argc, char **argv, char **envp)
 {
 char line[1024];
 char *args[512];
+//char *de
 while(1)
 	{
 		printf("rshell>");
         
         fflush(NULL);
 
+	//	de = "||";
         if(!fgets(line, 1024, stdin))
         	return 0;
-		char * cmd = line;
-		cmd = strtok(line, " ");
+		char * cut = line;
+		cut = strtok(line, "#");
+		char * cmd = cut;
+		cmd = strtok(cmd, " ");
 		int i = 0;
 		while (cmd != NULL){
 			args[i] = cmd;
 			printf("%s\n", args[i]);
 			++i;
 			cmd = strtok(NULL, " ");}
-			args[i] = NULL;
+		//	args[i] = NULL;
 
 		int pid = fork();
 		if(pid == -1){

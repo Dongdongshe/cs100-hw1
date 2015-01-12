@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <errno.h>
 
 using namespace std;
 
@@ -14,30 +15,38 @@ int main(int argc, char **argv)
 	char line[SIZE];
 	char * cmd;
 	char pch;
+	char *delimiters;
 
 	while (1)
 	{
-		cout << "rshell->";
-		if(cmd = cin.getline(line, SIZE))
-		{
-			errno = 0;
-			if(strcmp(cmd, "cd" == 0)
+		printf("rshell->");
+		fflush(NULL);
+
+		if(!fgets(line, SIZE,stdin)) break;
+		
+		delimiters = "||";
+
+		cmd = strtok(line, " ");
+		printf("%s\n", cmd);
+		
+			if(strcmp(cmd, "cd") == 0)
 			{
-				char * arg = strtok(NULL, SIZE);
-				
-				if 
-				
+				printf("cd command");
+				char * arg = strtok(NULL, " ");
+				printf("%s\n", arg);
+				if (!arg) fprintf(stderr, "cd missing argument.\n");
+			     else chdir(arg);
+			}	
 //		while (pch != NULL)
 //		{
 //			printf("%s\n", pch);
 //			pch = strtok(NULL, " ");
 //		}
-		string cmd = *pch;
-		if(cmd.compare("exit") == 0)
-		{
-			return 0;
-		}
-	}
+		else if(strcmp(cmd, "exit") == 0) {
+			printf("exit");
+			exit(0);}
+		else cout << "excute command here.";
+	    }
 	return 0;
 }
 
