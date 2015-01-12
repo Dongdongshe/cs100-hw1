@@ -22,22 +22,24 @@ while(1)
 		char * cut = line;
 		cut = strtok(line, "#");
 		char * cmd = cut;
-		cmd = strtok(cmd, " ");
+		cmd = strtok(cmd, " \n");
 		int i = 0;
 		while (cmd != NULL){
 			args[i] = cmd;
 			printf("%s\n", args[i]);
 			++i;
-			cmd = strtok(NULL, " ");}
+			cmd = strtok(NULL, " \n");}
 		//	args[i] = NULL;
 
 		int pid = fork();
 		if(pid == -1){
 			perror("sdf");
+			printf("error");
 			exit(1);
 		}
 		else if (pid == 0)
 		 {
+		 	printf("You are in child process now."); 
 			if(execvp(args[0], args) == -1){
 				printf("%s: %s\n", args[0], "command not found");
 		        exit(1);				}											 }
