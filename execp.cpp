@@ -9,27 +9,25 @@ int main(int argc, char **argv, char **envp)
 {
 char line[1024];
 char *args[512];
-//char *de
 while(1)
 	{
-		printf("rshell>");
-        
+		printf("rshell>");        
         fflush(NULL);
 
-	//	de = "||";
         if(!fgets(line, 1024, stdin))
         	return 0;
 		char * cut = line;
 		cut = strtok(line, "#");
 		char * cmd = cut;
 		cmd = strtok(cmd, " \n");
+
 		int i = 0;
 		while (cmd != NULL){
 			args[i] = cmd;
 			printf("%s\n", args[i]);
 			++i;
 			cmd = strtok(NULL, " \n");}
-		//	args[i] = NULL;
+
 		if (strcmp(args[0], "exit") == 0) exit(0);
 		else {
 		int pid = fork();
@@ -47,6 +45,7 @@ while(1)
 	     	 wait(NULL);
 	     }
 	}
+
 	}
 	return 0;
 }
