@@ -17,9 +17,7 @@ char *args[1024];
 char host[100];
 char *user;
 char *save;
-//static int* ret;
-//ret= mmap(NULL, sizeof *ret, PROT_READ | PROT_WRITE, 
-//                    MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+
 
 while(1)
 	{
